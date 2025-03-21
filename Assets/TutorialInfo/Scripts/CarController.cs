@@ -55,25 +55,36 @@ public class CarController : MonoBehaviour
 
     private void HandleMotor()
     {
-        
-        frontLeftWheelCollider.motorTorque = verticalInput * motorForce;
-        frontRightWheelCollider.motorTorque = verticalInput * motorForce;
-        rearLeftWheelCollider.motorTorque = verticalInput * motorForce;
-        rearRightWheelCollider.motorTorque = verticalInput * motorForce;
+        if (isBreaking)
+        {
+            frontLeftWheelCollider.motorTorque = 0;
+            frontRightWheelCollider.motorTorque = 0;
+            rearLeftWheelCollider.motorTorque = 0;
+            rearRightWheelCollider.motorTorque = 0;
+        }
+        else
+        {
+            frontLeftWheelCollider.motorTorque = verticalInput * motorForce;
+            frontRightWheelCollider.motorTorque = verticalInput * motorForce;
+            rearLeftWheelCollider.motorTorque = verticalInput * motorForce;
+            rearRightWheelCollider.motorTorque = verticalInput * motorForce;
+        }
 
-        
         currentBreakForce = isBreaking ? breakForce : (isHandBrake ? handBrakeForce : 0f);
         ApplyBrakes();
     }
 
+
     private void ApplyBrakes()
     {
-        
+        Debug.Log($"Freio: {currentBreakForce}");
+
         frontLeftWheelCollider.brakeTorque = currentBreakForce;
         frontRightWheelCollider.brakeTorque = currentBreakForce;
         rearLeftWheelCollider.brakeTorque = currentBreakForce;
         rearRightWheelCollider.brakeTorque = currentBreakForce;
     }
+
 
     private void HandleSteering()
     {
