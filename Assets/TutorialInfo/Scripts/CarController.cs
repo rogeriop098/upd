@@ -77,7 +77,6 @@ public class CarController : MonoBehaviour
 
     private void ApplyBrakes()
     {
-        Debug.Log($"Freio: {currentBreakForce}");
 
         frontLeftWheelCollider.brakeTorque = currentBreakForce;
         frontRightWheelCollider.brakeTorque = currentBreakForce;
